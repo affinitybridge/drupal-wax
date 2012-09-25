@@ -1,0 +1,6 @@
+name = Wax
+description = "Includes the wax mapping helper library."
+core = 7.x
+package = AB
+
+dependencies[] = libraries

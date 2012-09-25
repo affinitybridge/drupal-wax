@@ -1,0 +1,52 @@
+<?php
+
+function wax_library() {
+  $libraries = array();
+  $wax_path = libraries_get_path('wax');
+  $details = array(
+    'title' => t('Wax'),
+    'website' => 'http://mapbox.com/wax',
+    'version' => '6.4.3',
+    'js' => array(),
+    'css' => array(
+      $wax_path . '/theme/controls.css',
+    ),
+  );
+
+  foreach (array('g', 'leaf', 'mm', 'esri', 'ol') as $lib) {
+    $dist = "wax-$lib-dist";
+    $libraries[$dist] = $details;
+    $libraries[$dist]['js'] = array(
+      $wax_path . '/dist/wax.' . $lib . '.js' => array(),
+    );
+
+    $dev = "wax-$lib-dev";
+    $libraries[$dev] = $details;
+    $libraries[$dev]['js'] = array(
+      array('data' => ';var wax = wax || {};', 'type' => 'inline'),
+      $wax_path . '/lib/bean.js' => array(),
+      $wax_path . '/lib/html-sanitizer-bundle.js' => array(),
+      $wax_path . '/lib/html-sanitizer-loosen.js' => array(),
+      $wax_path . '/lib/mustache.js' => array(),
+      $wax_path . '/lib/reqwest.min.js' => array(),
+      $wax_path . '/control/lib/interaction.js' => array(),
+      $wax_path . '/control/lib/attribution.js' => array(),
+      $wax_path . '/control/lib/formatter.js' => array(),
+      $wax_path . '/control/lib/gridmanager.js' => array(),
+      $wax_path . '/control/lib/legend.js' => array(),
+      $wax_path . '/control/lib/movetip.js' => array(),
+      $wax_path . '/control/lib/template.js' => array(),
+      $wax_path . '/control/lib/tooltip.js' => array(),
+      $wax_path . '/control/lib/bwdetect.js' => array(),
+      $wax_path . '/control/lib/gridinstance.js' => array(),
+      $wax_path . '/control/lib/hash.js' => array(),
+      $wax_path . '/control/lib/request.js' => array(),
+      $wax_path . '/control/lib/tilejson.js' => array(),
+      $wax_path . '/control/lib/util.js' => array(),
+      $wax_path . '/control/leaf/interaction.js' => array(),
+      $wax_path . '/connectors/leaf/connector.js' => array(),
+    );
+  }
+
+  return $libraries;
+}
